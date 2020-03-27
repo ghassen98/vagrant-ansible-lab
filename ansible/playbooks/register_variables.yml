@@ -1,0 +1,15 @@
+- hosts: app01
+  remote_user: vagrant
+  become: yes
+  tasks:
+  - name: Ansible register variable basic example
+    shell: "find *.log"
+    args:
+      chdir: "/var/log"
+    register: find_output
+
+#  - shell: "cp {{ item }} /tmp/{{ item }}_bkp"
+#    args:
+#      chdir: "/var/log"
+#    with_items:
+#      - "{{ find_output.stdout_lines }}"
