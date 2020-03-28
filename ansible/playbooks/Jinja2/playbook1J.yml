@@ -1,0 +1,10 @@
+---
+- hosts: all
+  vars:
+    variable1: 'Hello...!!!'
+    variable2: ' using Template'
+  tasks:
+    - name: Template Example
+      template:
+        src: example1.j2
+        dest: /tmp/output.txt
