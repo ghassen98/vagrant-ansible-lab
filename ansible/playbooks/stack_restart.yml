@@ -4,15 +4,17 @@
     become: true
     tasks:
       - name: stop nginx
-        service: name=nginx state=stopped
-      -wait_for: port=80 state=drained
+        service: 
+          name: nginx
+          state: stopped
  
   - hosts: webserver
     become: true
     tasks:
       - name: stop apache2
-        service: name=apache2 state=stopped
-      -wait_for: port=80 state=stopped
+        service: 
+          name: apache2
+          state: stopped
 
 
 # restart daatabase
@@ -20,25 +22,28 @@
     become: true
     tasks:
       - name: restart mysql
-        service: name=mysql state=restarted
-      -wait_for: host={{ansible_eth0.ipv4.address}}  port=3306 state=started
+        service: 
+          name: mysql
+          state: restarted
+          args: 
+            host: "{{ ansible_eth0.ipv4.address }}"
+            port: 3306
+            state: started
 
 # start stack
   - hosts: webserver
     become: true
     tasks:
       - name: start apache2
-        service: name=apache2 state=started
-      -wait_for: port=80
+        service: 
+          name: apache2
+          state: started        
 
   - hosts: loadbalancer
     become: true
     tasks:
       - name: start nginx
-        service: name=nginx state=started
-      -wait_for: port=80
-
-
-
-
+        service: 
+          name: nginx
+          state: started
 

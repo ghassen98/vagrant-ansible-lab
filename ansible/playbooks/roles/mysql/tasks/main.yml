@@ -15,6 +15,12 @@
     notify: restart mysql
     tags: ['configure']
 
+  - name: ensure mysql has the needed configuration
+    lineinfile: 
+        path: /etc/mysql/my.cnf
+        line: '[mysqld]'
+        insertbefore: BOF
+
   - name: ensure mysql started
     service: name=mysql state=started enabled=yes
     tags: ['service']

@@ -7,6 +7,8 @@
     args:
       chdir: "/var/log"
     register: find_output
+#  - debug:
+#      var: find_output
 
 #  - shell: "cp {{ item }} /tmp/{{ item }}_bkp"
 #    args:

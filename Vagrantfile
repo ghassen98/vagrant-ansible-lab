@@ -11,9 +11,18 @@
 # This should put you at the control host
 #  with access, by name, to other vms
 Vagrant.configure(2) do |config|
+  config.vm.boot_timeout = 600
   config.hostmanager.enabled = true
+#  config.hostmanager.manage_host = true
+#  config.hostmanager.manage_guest = true
 
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 1024
+    v.cpus = 2
+  end
+
+#  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "gusztavvargadr/ubuntu-server"
 
   config.vm.define "control", primary: true do |h|
     h.vm.hostname =  "control"
